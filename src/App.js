@@ -28,13 +28,19 @@ function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
-  
+
+  const resetQuiz = () => {
+    setCurrentQuestion(0);
+    setScore(0);
+    setShowScore(false);
+  }
+
   return (
     <div className="app">
       {showScore ? (
         <div className='score-section'>
           <h2>Your Score: {score} / {questions.length}</h2>
-          <button onClick={() => resetQuiz()}>Restart Quiz</button>
+          <button onClick={resetQuiz}>Restart Quiz</button>
         </div>
       ) : (
         <div className='quiz-section'>
@@ -43,10 +49,10 @@ function App() {
           </h2>
           <p>{questions[currentQuestion].question}</p>
           <div className='options'>
-            {questions[currentQuestions].options.map((option, index) => (
+            {questions[currentQuestion].options.map((option, index) => (
               <button 
                 key={index}
-                onClick={() => handleAnswer(option)}  
+                onClick={() => handleAnswer(option)}
                 className='option-button'
               >
                 {option}
