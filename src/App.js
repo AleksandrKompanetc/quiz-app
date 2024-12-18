@@ -26,8 +26,31 @@ const questions = [
 
 function App() {
   return (
-    <div className="App">
-      Quiz App
+    <div className="app">
+      {showScore ? (
+        <div className='score-section'>
+          <h2>Your Score: {score} / {questions.length}</h2>
+          <button onClick={() => resetQuiz()}>Restart Quiz</button>
+        </div>
+      ) : (
+        <div className='quiz-section'>
+          <h2>
+            Question {currentQuestion + 1}/{questions.length}
+          </h2>
+          <p>{questions[currentQuestion].question}</p>
+          <div className='options'>
+            {questions[currentQuestions].options.map((option, index) => (
+              <button 
+                key={index}
+                onClick={() => handleAnswer(option)}  
+                className='option-button'
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
