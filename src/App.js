@@ -29,6 +29,19 @@ function App() {
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
 
+  const handleAnswer = (selectedOption) => {
+    const isCorrect = selectedOption === questions[currentQuestion].answer;
+    if (isCorrect) {
+      setScore(score + 1)
+    }
+    const nextQuestion = currentQuestion + 1;
+    if (nextQuestion < questions.length) {
+      setCurrentQuestion(nextQuestion)
+    } else {
+      setShowScore(true)
+    }
+  }
+
   const resetQuiz = () => {
     setCurrentQuestion(0);
     setScore(0);
