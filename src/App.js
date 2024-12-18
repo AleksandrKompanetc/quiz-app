@@ -25,6 +25,10 @@ const questions = [
 ]
 
 function App() {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [score, setScore] = useState(0);
+  const [showScore, setShowScore] = useState(false);
+  
   return (
     <div className="app">
       {showScore ? (
