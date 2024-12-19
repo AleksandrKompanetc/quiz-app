@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import './App.css';
 
 const questions = [
@@ -28,6 +28,22 @@ function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(10);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prevTime) => {
+        if (prevTime <= 1) {
+          clearInterval(timer);
+          handleAnswer(null); // Если время истекло
+          return 10;
+        }
+        return prevTime - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer); // Очищаем таймер при размонтировании
+  }, [currentQuestion]);
 
   const handleAnswer = (selectedOption) => {
     const isCorrect = selectedOption === questions[currentQuestion].answer;
@@ -57,9 +73,10 @@ function App() {
         </div>
       ) : (
         <div className='quiz-section'>
-          <h2>
+          <h2>Time left: {timeLeft} seconds </h2>
+          <h3>
             Question {currentQuestion + 1}/{questions.length}
-          </h2>
+          </h3>
           <p>{questions[currentQuestion].question}</p>
           <div className='options'>
             {questions[currentQuestion].options.map((option, index) => (
