@@ -19,7 +19,7 @@ const questions = [
   },
   {
     question: 'What is the chemical symbol for water?',
-    options: ['o2', 'H20', 'CO2', 'H2'],
+    options: ['O2','H20', 'CO2', 'H2'],
     answer: 'H2O',
   },
 ]
